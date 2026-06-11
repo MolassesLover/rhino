@@ -15,28 +15,29 @@ cd "$(dirname "$0")"
 dir="$(pwd)"
 
 if [ -e .git ]; then
-  git submodule update --init ruby181
+	git submodule update --init ruby181
 fi
 
 cd ruby181
 if [ ! -e configure ]; then
-  autoconf
+	autoconf
 fi
 if [ ! -e Makefile ]; then
-  ./configure \
-    --prefix="$dir/ruby181-build" \
-
+	./configure \
+		CFLAGS="-Wno-incompatible-pointer-types" \
+		CXXFLAGS="-Wno-incompatible-pointer-types" \
+		--prefix="$dir/ruby181-build"
 fi
 
-echo "option nodynamic" > ext/Setup.tapir
-echo "zlib" >> ext/Setup.tapir
-echo "nkf" >> ext/Setup.tapir
+echo "option nodynamic" >ext/Setup.tapir
+echo "zlib" >>ext/Setup.tapir
+echo "nkf" >>ext/Setup.tapir
 
 sed -i.bak -e 's/"Setup"/"Setup.tapir"/' config.status
 rm -f config.status.bak
 if [ -e rbconfig.rb ]; then
-  sed -i.bak -e 's/"Setup"/"Setup.tapir"/' rbconfig.rb
-  rm -f rbconfig.rb.bak
+	sed -i.bak -e 's/"Setup"/"Setup.tapir"/' rbconfig.rb
+	rm -f rbconfig.rb.bak
 fi
 
 make "$@"

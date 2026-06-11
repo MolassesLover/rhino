@@ -11,14 +11,18 @@ echo "Generating configure..." >&2
 autoconf
 
 if [ -e .git ]; then
-  echo "Updating ruby181..." >&2
-  git submodule update --init ruby181
-  echo "Updating ruby192..." >&2
-  git submodule update --init ruby192
+	echo "Updating ruby181..." >&2
+	git submodule update --init ruby181
+	echo "Updating ruby192..." >&2
+	git submodule update --init ruby192
 fi
 echo "Generating ruby181/configure..." >&2
-cd ruby181; autoconf; cd ..
+cd ruby181
+autoconf
+cd ..
 echo "Generating ruby192/configure..." >&2
-cd ruby192; autoconf; cd ..
+cd ruby192
+autoconf
+cd ..
 
 echo "autogen.sh: success" >&2

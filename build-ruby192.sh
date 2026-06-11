@@ -15,30 +15,31 @@ cd "$(dirname "$0")"
 dir="$(pwd)"
 
 if [ -e .git ]; then
-  git submodule update --init ruby192
+	git submodule update --init ruby192
 fi
 
 cd ruby192
 if [ ! -e configure ]; then
-  autoconf
+	autoconf
 fi
 if [ ! -e Makefile ]; then
-  ./configure \
-    --prefix="$dir/ruby192-build" \
-    --disable-install-doc \
-    --with-ext= \
-    --with-static-linked-ext \
-
+	./configure \
+		CFLAGS="-Wno-incompatible-pointer-types" \
+		CXXFLAGS="-Wno-incompatible-pointer-types" \
+		--prefix="$dir/ruby192-build" \
+		--disable-install-doc \
+		--with-ext= \
+		--with-static-linked-ext
 fi
 
-echo "option nodynamic" > ext/Setup.tapir
-echo "zlib" >> ext/Setup.tapir
+echo "option nodynamic" >ext/Setup.tapir
+echo "zlib" >>ext/Setup.tapir
 
 sed -i.bak -e 's/"Setup"/"Setup.tapir"/' config.status
 rm -f config.status.bak
 if [ -e rbconfig.rb ]; then
-  sed -i.bak -e 's/"Setup"/"Setup.tapir"/' rbconfig.rb
-  rm -f rbconfig.rb.bak
+	sed -i.bak -e 's/"Setup"/"Setup.tapir"/' rbconfig.rb
+	rm -f rbconfig.rb.bak
 fi
 
 make "$@"

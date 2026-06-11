@@ -1,0 +1,68 @@
+set(SOURCE_FILES
+    src/archive.c
+    src/Audio.c
+    src/Bitmap.c
+    src/BitmapArray.c
+    src/Color.c
+    src/font_lookup.c
+    src/Font.c
+    src/gl_misc.c
+    src/Graphics.c
+    src/ini.c
+    src/Input.c
+    src/launcher.c
+    src/main_rb.c
+    src/main.c
+    src/misc.c
+    src/openres.c
+    src/Plane.c
+    src/Rect.c
+    src/RGSSError.c
+    src/RGSSReset.c
+    src/sdl_misc.c
+    src/Sprite.c
+    src/surface_misc.c
+    src/Table.c
+    src/tapir_config.c
+    src/Tilemap.c
+    src/Tone.c
+    src/Viewport.c
+    src/Win32APIFake.c
+    src/Window.c
+)
+
+set(HEADER_FILES
+    include/archive.h
+    include/Audio.h
+    include/Bitmap.h
+    include/BitmapArray.h
+    include/Color.h
+    include/font_lookup.h
+    include/Font.h
+    include/gl_misc.h
+    include/Graphics.h
+    include/ini.h
+    include/Input.h
+    include/main_rb.h
+    include/misc.h
+    include/openres.h
+    include/Plane.h
+    include/Rect.h
+    include/RGSSError.h
+    include/RGSSReset.h
+    include/rubyfill.h
+    include/sdl_misc.h
+    include/Sprite.h
+    include/surface_misc.h
+    include/Table.h
+    include/tapir_config.h
+    include/Tilemap.h
+    include/Tone.h
+    include/Viewport.h
+    include/Win32APIFake.h
+    include/Window.h
+)
+
+add_executable(rhino ${SOURCE_FILES} ${HEADER_FILES})
+
+target_include_directories(rhino PUBLIC include)
