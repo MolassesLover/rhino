@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 3.14)
 project(rhino-rgss)
 
+include(ExternalProject)
+
 set(CMAKE_BUILD_RPATH_USE_ORIGIN ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 98)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 set(COMMON_FLAGS "\
@@ -17,14 +19,44 @@ set(COMMON_FLAGS "\
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -D_GLIBCXX_ASSERTIONS")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
-find_package(SDL3)
+add_compile_definitions(RGSS=2)
 
-macro(link TARGET)
+ExternalProject_Add(ruby181
+  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+  INSTALL_DIR "${INSTALL}"
+  BUILD_COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/build-ruby181.sh
+  INSTALL_COMMAND exit 0 # Do nothing
+)
+
+add_library(ruby STATIC IMPORTED GLOBAL)
+set_target_properties(ruby PROPERTIES
+  IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/ruby181-build/lib/libruby-static.a"
+)
+target_include_directories(ruby INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/libs/ruby181/include/ruby")
+
+find_package(SDL2)
+find_package(SDL2_mixer)
+find_package(SDL2_image)
+find_package(SDL2_ttf)
+find_package(OpenGL)
+find_package(libconfig)
+find_package(Fontconfig)
+
+include_directories(${SDL_INCLUDE_DIRS} ${Fontconfig_INCLUDE_DIRS} libs/ruby)
+
+macro(link TARGET)    
     target_link_libraries(${TARGET} PRIVATE
-        SDL3::SDL3
+        SDL2::SDL2 
+        SDL2_mixer::SDL2_mixer 
+        SDL2_image::SDL2_image
+        SDL2_ttf::SDL2_ttf
+        OpenGL::GL
+        Fontconfig::Fontconfig
+        config 
+        ruby 
+        -lm
+        -lcrypt
     )
-
-    target_include_directories(${TARGET} PUBLIC ${IPC_INCLUDES} core/include)
 endmacro()  
 
 add_subdirectory(core)

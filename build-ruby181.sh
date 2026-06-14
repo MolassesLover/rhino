@@ -59,3 +59,7 @@ fi
 
 make "$@"
 make install
+
+cd "${dir}"
+mkdir -p libs/ruby181/include/
+cp -r ruby181-build/lib/ruby/1.8/x86_64-linux libs/ruby181/include/ruby

@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/ruby181-prefix/src/ruby181-build/cmake_install.cmake",
+		"/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/ruby181-prefix/src/ruby181-build/core/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

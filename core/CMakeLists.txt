@@ -10,9 +10,9 @@ set(SOURCE_FILES
     src/Graphics.c
     src/ini.c
     src/Input.c
-    src/launcher.c
-    src/main_rb.c
-    src/main.c
+    # src/launcher.c
+    # src/main_rb.c
+    # src/main.c
     src/misc.c
     src/openres.c
     src/Plane.c
@@ -63,6 +63,7 @@ set(HEADER_FILES
     include/Window.h
 )
 
-add_executable(rhino ${SOURCE_FILES} ${HEADER_FILES})
+add_library(librhino ${SOURCE_FILES} ${HEADER_FILES})
+target_include_directories(librhino PUBLIC include)
 
-target_include_directories(rhino PUBLIC include)
+link(librhino)
