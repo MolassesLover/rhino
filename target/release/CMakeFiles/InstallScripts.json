@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/cmake_install.cmake",
-		"/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/core/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

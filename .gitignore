@@ -50,3 +50,10 @@ Makefile.in
 /texinfo.tex
 
 # End of https://www.gitignore.io/api/autotools
+
+[Bb]in
+[Bb]uild
+[Oo]ut
+[Oo]utput
+[Rr]elease
+[Tt]arget

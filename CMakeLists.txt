@@ -19,20 +19,28 @@ set(COMMON_FLAGS "\
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -D_GLIBCXX_ASSERTIONS")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
-add_compile_definitions(RGSS=2)
+set(RGSS_VERSION 2)
 
-ExternalProject_Add(ruby181
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-  INSTALL_DIR "${INSTALL}"
-  BUILD_COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/build-ruby181.sh
-  INSTALL_COMMAND exit 0 # Do nothing
+add_compile_definitions(RGSS=${RGSS_VERSION})
+
+if(${RGSS_VERSION} EQUAL 2)
+    set(RUBY_VERSION 181)
+elseif(${RGSS_VERSION} EQUAL 3)
+    set(RUBY_VERSION 192)
+endif()
+
+ExternalProject_Add("ruby${RUBY_VERSION}"
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+    INSTALL_DIR "${INSTALL}"
+    BUILD_COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/build-ruby${RUBY_VERSION}.sh"
+    INSTALL_COMMAND exit 0 # Do nothing
 )
 
 add_library(ruby STATIC IMPORTED GLOBAL)
 set_target_properties(ruby PROPERTIES
-  IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/ruby181-build/lib/libruby-static.a"
+  IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/ruby${RUBY_VERSION}-build/lib/libruby-static.a"
 )
-target_include_directories(ruby INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/libs/ruby181/include/ruby")
+target_include_directories(ruby INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/libs/ruby${RUBY_VERSION}/include/ruby")
 
 find_package(SDL2)
 find_package(SDL2_mixer)

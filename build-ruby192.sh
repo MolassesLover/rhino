@@ -61,3 +61,7 @@ fi
 
 make "$@"
 make install
+
+cd "${dir}"
+mkdir -p libs/ruby192/include/
+cp -r ruby181-build/lib/ruby/1.9/x86_64-linux libs/ruby192/include/ruby

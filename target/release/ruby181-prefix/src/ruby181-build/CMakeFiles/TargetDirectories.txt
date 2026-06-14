@@ -1,6 +1,0 @@
-/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/ruby181-prefix/src/ruby181-build/CMakeFiles/ruby181.dir
-/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/ruby181-prefix/src/ruby181-build/CMakeFiles/edit_cache.dir
-/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/ruby181-prefix/src/ruby181-build/CMakeFiles/rebuild_cache.dir
-/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/ruby181-prefix/src/ruby181-build/core/CMakeFiles/librhino.dir
-/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/ruby181-prefix/src/ruby181-build/core/CMakeFiles/edit_cache.dir
-/home/maeve/Source/Repositories/GitHub/MolassesLover/rhino/target/release/ruby181-prefix/src/ruby181-build/core/CMakeFiles/rebuild_cache.dir
